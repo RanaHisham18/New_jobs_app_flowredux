@@ -1,0 +1,2 @@
+rootProject.name = "New_jobs_app_flowredux"
+include ':app'

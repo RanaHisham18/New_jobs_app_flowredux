@@ -5,23 +5,17 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class NewsViewModel : ViewModel() {
+class NewsViewModel(val stateMachine: NewsStatemachine) : ViewModel() {
     init {
-        dispatch(NewsActions.Fetch)
+        dispatch(NewsActions.Retry)
     }
 
-    fun dispatch(fetch: NewsActions.Retry) {
+    fun dispatch(newsAction: NewsActions) {
         viewModelScope.launch {
-            Timber.tag("FlowRedux - action -> ").d(action.toString())
-            stateMachine.dispatch(action)
+          //  Timber.tag("FlowRedux - action -> ").d(action.toString())
+            stateMachine.dispatch(newsAction)
         }
     }
 
-    //actions and states have to be declared in state machine base class or implemented in statemachine fragment.
-    override fun onCleared() {
-
-        stateMachine.clear(state.value)
-        super.onCleared()
-    }
 
 }

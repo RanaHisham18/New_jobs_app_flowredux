@@ -1,11 +1,11 @@
 package com.rana.new_jobs_app_flowredux.Ui.FlowRedux
 
-import com.rana.new_jobs_app_flowredux.domain.entities.NewsDomain
+import com.rana.new_jobs_app_flowredux.data.remote.entities.NewsResponse
 
 sealed class NewsState {
     object Loading : NewsState()
     data class Success(
-        val news: List<NewsDomain>,
+        val news: List<NewsResponse.Article>,
         val isRefreshing: Boolean,
     ) : NewsState()
 

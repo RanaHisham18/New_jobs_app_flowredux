@@ -16,7 +16,7 @@ class NewsFragment {
             viewModel.dispatch(Retry)
 
         }
-    override fun renderState(state: NewsState) {
+ fun renderState(state: NewsState) {
         when(state){
            NewsState.Empty -> {}
             is NewsState.Error -> {}

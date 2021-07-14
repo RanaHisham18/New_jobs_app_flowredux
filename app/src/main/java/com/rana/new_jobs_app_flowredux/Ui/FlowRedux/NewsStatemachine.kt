@@ -1,14 +1,14 @@
 package com.rana.new_jobs_app_flowredux.Ui.FlowRedux
 
-import android.widget.GridLayout.spec
 import arrow.core.Either
 import com.freeletics.flowredux.GetState
+import com.freeletics.flowredux.dsl.FlowReduxStateMachine
 import com.freeletics.flowredux.dsl.SetState
 import com.rana.new_jobs_app_flowredux.domain.repository.INewsRepository
 
 class NewsStatemachine(
     private val repo: INewsRepository,
-) {
+) : FlowReduxStateMachine<NewsState, NewsActions>(initialState = NewsState.Loading) {
 
 
     init {
@@ -39,7 +39,7 @@ class NewsStatemachine(
             is Either.Left -> setState { NewsState.Error("Error Message") }
             is Either.Right -> setState {
                 NewsState.Success(
-                    // users = result.b,
+                    news = result.b,
                     isRefreshing = false
                 )
             }
@@ -70,7 +70,7 @@ class NewsStatemachine(
                     setState {
                         currentState.copy(
                             isRefreshing = false,
-                            users = result.b
+                            news = result.b
                         )
                     }
                 }
